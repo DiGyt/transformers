@@ -814,6 +814,11 @@ class TFT5MainLayer(tf.keras.layers.Layer):
 
             if inputs["output_attentions"]:
                 all_attentions = all_attentions + (layer_outputs[3],)
+                if self.is_decoder:
+                    #if i == 0:
+                    #    all_attentions = all_attentions + (layer_outputs[4],)  # append cross-attention weights
+                    #else:
+                    all_attentions = all_attentions + (layer_outputs[4],)  # append cross-attention weights
 
         hidden_states = self.final_layer_norm(hidden_states)
         hidden_states = self.dropout(hidden_states, training=inputs["training"])
