@@ -586,8 +586,7 @@ class TFT5Block(tf.keras.layers.Layer):
             )
             hidden_states = cross_attention_outputs[0]
             # Combine self attn and cross attn key value states
-            if present_key_value_state is not None:
-                print(cross_attention_outputs, flush=True)
+            if (present_key_value_state is not None) and (cross_attention_outputs[1] is not None):
                 present_key_value_state = present_key_value_state + cross_attention_outputs[1]
 
             # Keep cross-attention outputs and relative position weights
